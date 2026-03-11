@@ -20,7 +20,9 @@ BASE_URL: '/your-repo-name'
 
 ### 3. Enable GitHub Pages
 
-Go to **Settings → Pages** and set **Source** to **GitHub Actions**. Pushes to `main` will trigger a build and deploy automatically.
+Go to **Settings → Pages** under **Build and deployment** and set **Source** to **GitHub Actions**. Pushes to `main` will trigger a build and deploy automatically.
+
+> Note that if you don't do this prior to pushing your code to the fork then the first GitHub Actions workflow run will fail. But once you enable this, you can re-run the failed job and it should succeed.
 
 ### 4. Customize your content
 
@@ -28,7 +30,7 @@ All site content lives in the `docs/` directory. Edit these files with your own 
 
 | File | Purpose |
 |------|---------|
-| `docs/myst.yml` | Site title, description, keywords, GitHub URL |
+| `docs/myst.yml` | Site title, description, keywords, GitHub URL, table of contents |
 | `docs/index.md` | Homepage — introduction and navigation cards |
 | `docs/cv.md` | Education, positions, awards, teaching, service |
 | `docs/publications.md` | Journal articles, proceedings, preprints, theses |
