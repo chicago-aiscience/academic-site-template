@@ -33,16 +33,17 @@ else
 	@echo "Dependencies installed successfully!"
 endif
 
-# Build the Jupyter Book site
+# Build the Jupyter Book site (static HTML — must be served, not opened as a file)
 build: install
 	@echo "Building Jupyter Book site..."
 	cd $(DOCS_DIR) && $(if $(UV),uv run jupyter book build --html,jupyter book build --html)
 	@echo "Build complete! Output available in $(HTML_DIR)"
+	@echo "NOTE: Open via 'make serve', not by opening the HTML file directly."
 
-# Serve the site locally (builds and hosts)
+# Serve the site locally (starts a dev server at localhost:3000)
 serve: install
 	@echo "Starting Jupyter Book development server..."
-	@echo "The site will be available at http://localhost:8000 (or the next available port)"
+	@echo "The site will be available at http://localhost:3000"
 	@echo "Press Ctrl+C to stop the server"
 	cd $(DOCS_DIR) && $(if $(UV),uv run jupyter book start,jupyter book start)
 
