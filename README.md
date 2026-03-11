@@ -12,6 +12,8 @@ Click **Fork** at the top of this page to create your own copy under your GitHub
 
 Go to **Settings → General → Repository name** and rename the repo to `yourusername.github.io`. This makes your site available at `https://yourusername.github.io`.
 
+The deployment workflow automatically detects the correct base URL — no manual configuration needed.
+
 ### 3. Enable GitHub Pages
 
 Go to **Settings → Pages** under **Build and deployment** and set **Source** to **GitHub Actions**. Every push to `main` will automatically build and deploy your site.

@@ -5,11 +5,6 @@ name: Jupyter Book (via myst) GitHub Pages Deploy
 on:
   push:
     branches: [main]
-env:
-  # BASE_URL determines the URL path your site is served from, relative to the domain root.
-  # - User/org site (e.g. yourusername.github.io): set BASE_URL=''
-  # - Project site (e.g. yourusername.github.io/myrepo): set BASE_URL='/myrepo'
-  BASE_URL: ''
 
 permissions:
   contents: read
@@ -35,6 +30,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18.x
+
+      - name: Set BASE_URL
+        # User/org sites (repo named yourusername.github.io) deploy at the root → BASE_URL=''
+        # Project sites (any other repo name) deploy at a subpath → BASE_URL=/repo-name
+        run: |
+          REPO_NAME="${{ github.event.repository.name }}"
+          OWNER="${{ github.repository_owner }}"
+          if [ "$REPO_NAME" = "${OWNER}.github.io" ]; then
+            echo "BASE_URL=" >> $GITHUB_ENV
+          else
+            echo "BASE_URL=/$REPO_NAME" >> $GITHUB_ENV
+          fi
 
       - name: Install Jupyter Book (via myst)
         run: npm install -g jupyter-book
