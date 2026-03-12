@@ -4,21 +4,17 @@ A template for building a personal academic website using [MyST Markdown](https:
 
 ## Quick Start
 
-### 1. Fork this repository
+### 1. Create a new repository from this template
 
-Click **Fork** at the top of this page to create your own copy under your GitHub account.
+Click **Use this template → Create a new repository** at the top, right of this page. Name the new repo `yourusername` (or your name, how you want to the site to be referenced) — this makes your site available at `https://yourusername.github.io`.
 
-### 2. Rename your fork
+> This gives you a clean repo with no fork relationship to this one, which is ideal for a personal site. **Note** respository visibility should be set to 'public' for the GitHub Actions workflow to run successfully.
 
-Go to **Settings → General → Repository name** and rename the repo to `yourusername.github.io`. This makes your site available at `https://yourusername.github.io`.
+### 2. Enable GitHub Pages
 
-The deployment workflow automatically detects the correct base URL — no manual configuration needed.
+In your new repo, go to **Settings → Pages** under **Deployment and build** and set **Source** to **GitHub Actions**. Every push to `main` will automatically build and deploy your site.
 
-### 3. Enable GitHub Pages
-
-Go to **Settings → Pages** under **Build and deployment** and set **Source** to **GitHub Actions**. Every push to `main` will automatically build and deploy your site.
-
-> If you enable Pages after your first push, the initial workflow run will fail. Just re-run the failed job from the **Actions** tab once Pages is enabled.
+> The first GitHub Actions workflow run will faile when you first create the repository from the template because Pages is not enabled. You can locate that first run in the **Actions** tab. Click on the first run and click on the drop-down to re-run the job which should create the site and provide the URL is it hosted on.
 
 ### 4. Customize your content
 
@@ -61,6 +57,38 @@ Drop a photo into `docs/images/` and reference it in `docs/index.md`.
 #### Custom styles
 
 Edit `docs/styles/custom.css` to adjust colors, fonts, or layout.
+
+#### Add a new page
+
+1. **Create the file** — add a new Markdown file in `docs/`, e.g. `docs/research.md`:
+
+   ```markdown
+   # Research
+
+   Describe your research interests here.
+   ```
+
+2. **Register it in `docs/myst.yml`** — add the file to the `toc` list so it appears in the site navigation:
+
+   ```yaml
+   toc:
+     - file: index.md
+     - file: cv.md
+     - file: publications.md
+     - file: outreach.md
+     - file: research.md   # ← your new page
+   ```
+
+3. **Link to it from the homepage** (optional) — add a card to `docs/index.md` so users can reach the page from the landing grid:
+
+   ```markdown
+   :::{card} Research
+   :link: research.md
+   A summary of my research interests and projects.
+   :::
+   ```
+
+Pages are rendered in the order they appear in `toc` (Table of Contents), which also controls the sidebar navigation order.
 
 ---
 
@@ -137,7 +165,7 @@ Deployment is fully automated via `.github/workflows/deploy.yml`. Every push to 
 
 ---
 
-## Custom Domain -- DRAFT, not tested
+## Custom Domain [NOT TESTED]
 
 You can serve your site from a personal domain (e.g., `yourname.com`) instead of `yourusername.github.io`.
 
@@ -167,17 +195,6 @@ At your domain registrar, add the following records:
 | A | `@` | `185.199.110.153` |
 | A | `@` | `185.199.111.153` |
 | CNAME | `www` | `yourusername.github.io` |
-
-### Recommended DNS providers
-
-For a personal academic site, any standard domain registrar works — DNS configuration is a one-time manual step. Good options:
-
-| Provider | Notes |
-|----------|-------|
-| [**Namecheap**](https://namecheap.com) | Most popular in the academic/developer community. Free WHOIS privacy, clean DNS editor, ~$10–12/year for `.com`. |
-| [**Porkbun**](https://porkbun.com) | Lowest prices on most TLDs (`.com`, `.io`, `.me`). Free WHOIS privacy, simple interface. |
-| [**Hover**](https://hover.com) | No upsells, privacy included, very clean UI. Good if you want a hassle-free experience. |
-| [**Gandi**](https://gandi.net) | European registrar with strong privacy defaults, includes email forwarding. |
 
 ---
 
